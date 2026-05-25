@@ -1,4 +1,4 @@
-#!/bin/bash
+\#!/bin/bash
 
 # =========================
 # KHAI BAO BIEN
@@ -88,6 +88,15 @@ view_logs() {
 }
 
 # =========================
+
+# =========================
+# AUTO MODE CHO CRONJOB
+# =========================
+
+if [ "$1" == "auto" ]; then
+    backup_data
+    exit 0
+fi
 # MENU
 # =========================
 while true
