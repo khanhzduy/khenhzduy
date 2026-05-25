@@ -27,7 +27,7 @@ NC='\033[0m'
 # =========================
 # KIEM TRA INTERNET
 # =========================
-check_internet() {
+    check_internet() {
     ping -c 1 google.com &> /dev/null
 
     if [ $? -eq 0 ]; then
