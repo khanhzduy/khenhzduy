@@ -43,22 +43,32 @@ check_internet() {
 backup_data() {
 
     TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+
     BACKUP_FILE="backup_$TIMESTAMP.tar.gz"
 
     tar -czf "$BACKUP_DIR/$BACKUP_FILE" "$DATA_DIR"
 
-    echo "$(date): Backup created -> $BACKUP_FILE" >> "$LOG_FILE"
+    echo "$(date): Backup success -> $BACKUP_FILE" >> "$LOG_FILE"
 
-    echo -e "${GREEN}Backup thanh cong:${NC} $BACKUP_FILE"
+    echo -e "${GREEN}Backup thanh cong${NC}"
 
-    # =========================
-    # BONUS: CHI GIU 5 FILE MOI NHAT
-    # =========================
     cd "$BACKUP_DIR"
 
+    # Chi giu 5 backup moi nhat
     ls -tp | grep '\.tar.gz$' | tail -n +6 | xargs -r rm --
 
-    echo -e "${YELLOW}Da xoa backup cu, chi giu lai 5 file moi nhat.${NC}"
+    echo -e "${YELLOW}Da giu lai 5 backup moi nhat${NC}"
+
+    # Tu dong push GitHub
+    cd /root/student_backup_system
+
+    git add .
+
+    git commit -m "Auto backup $(date)"
+
+    git push origin main
+
+    echo -e "${BLUE}Da push len GitHub${NC}"
 }
 
 # =========================
